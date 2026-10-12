@@ -1,0 +1,33 @@
+name: Sync README from main repo
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Fetch README from main repo
+        run: |
+          curl -sSfL \
+            https://raw.githubusercontent.com/step-review/step-review/main/README.md \
+          | sed -E \
+            -e 's#src="([^":]+)"#src="https://raw.githubusercontent.com/step-review/step-review/main/\1"#g' \
+            -e 's#\]\(([^):\#]+)\)#](https://github.com/step-review/step-review/blob/main/\1)#g' \
+            > profile/README.md
+
+      - name: Commit and push if changed
+        run: |
+          git diff --quiet profile/README.md && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/README.md
+          git commit -m "sync README from step-review/step-review"
+          git push
