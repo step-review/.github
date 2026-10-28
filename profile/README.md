@@ -1,3 +1,5 @@
+<p align="center"><a href="https://step-review.dev"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/brand-dark.png"><img src="https://raw.githubusercontent.com/step-review/step-review/main/docs/media/brand-light.png" alt="Step Review: a better way to review PRs" width="308" height="96"></picture></a><a href="https://floor0.dev"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/credits-dark.png"><img src="https://raw.githubusercontent.com/step-review/step-review/main/docs/media/credits-light.png" alt="by floor 0" width="179" height="96"></picture></a></p>
+
 Step Review helps you review large PRs and actually understand them. This way,
 you keep a handle on your codebase even when coding agents produce mountains of
 code that you can't realistically review line by line.
@@ -38,24 +40,9 @@ Then, Step Review's [SKILL.md](https://github.com/step-review/step-review/blob/m
 - Teaches the agent the format.
 - Tells it how to prepare the review: how to split the changes into steps, and
   what deserves a note.
-- Tells it to build the review file and write it in your repository, without
-  committing it.
-
-## Development
-
-pnpm monorepo:
-
-- [`packages/app`](https://github.com/step-review/step-review/blob/main/packages/app): the web app (Vite, React, Primer).
-- [`packages/review-format`](https://github.com/step-review/step-review/blob/main/packages/review-format): the review file format:
-  schemas, parser and consistency checks.
-- [`packages/session-server`](https://github.com/step-review/step-review/blob/main/packages/session-server): the server of sessions
-  (a Cloudflare Worker with Durable Objects), and its protocol.
-- [`packages/tooling/oxlint-custom-rules`](https://github.com/step-review/step-review/blob/main/packages/tooling/oxlint-custom-rules):
-  architecture lint rules.
-
-See [Setup](https://github.com/step-review/step-review/blob/main/docs/setup.md) for requirements, commands and deployment.
-Contributors and coding agents follow the principles in
-[`AGENTS.md`](https://github.com/step-review/step-review/blob/main/AGENTS.md).
+- Tells it to build the review file with
+  [`@step-review/cli`](https://github.com/step-review/step-review/blob/main/packages/cli/README.md), which reports the problems the
+  app would show, and to write it in your repository, without committing it.
 
 ## License
 
